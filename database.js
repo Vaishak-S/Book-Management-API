@@ -26,10 +26,10 @@ const author = [
 
 const publication = [
     {
-        id: 1,
+        id: 123,
         name: "writex",
         books: ["12345Book"]
     },
 ];
 
-module.exports = { books, author, publication};
+module.exports = {books, author, publication};

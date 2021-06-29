@@ -1,7 +1,7 @@
 const express = require("express");
 
 //importing database
-const database = require("./database/node_modules");
+const database = require("./database");
 
 //Initialization
 const booky = express();
@@ -25,8 +25,8 @@ Parameter       isbn
 Methods         get
 */  
 booky.get("/is/:isbn", (req,res) => {
-    const getSpecificBook = database.books.filter(
-        (book) => book.ISBN === req.params.isbn
+    const getSpecificBook = database.books.filter((book) =>
+    book.ISBN === req.params.isbn
     );
 
     if(getSpecificBook.length === 0) {
@@ -97,14 +97,14 @@ Access          public
 Parameter       authorId
 Methods         get
 */  
-booky.get("/author/specific/:authorId", (req,res) => {
+booky.get("/a/:ID", (req,res) => {
     const getSpecificAuthor = database.author.filter((num) => 
-    num.id === req.params.authorId
+    num.id === req.params.ID
     );
 
     if(getSpecificAuthor.length === 0) {
         return res.json({
-            error: `No author found for the ID of ${req.params.authorId}`,
+            error: `No author found for the ID of ${req.params.ID}`,
     });
 };
 
@@ -152,8 +152,8 @@ Parameter       none
 Methods         get
 */ 
 booky.get("/publications/:num", (req,res) => {
-    const getSpecificPublication = database.publication.filter
-    ((publications) => publications.id === req.params.num
+    const getSpecificPublication = database.publication.filter((publications) => 
+    publications.id === req.params.num
     );
 
     if(getSpecificPublication.length === 0) {

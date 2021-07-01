@@ -288,7 +288,7 @@ booky.put("/author/update/name/:num", (req,res) => {
 });
 
 /*
-Route           /auth
+Route           /publication/update/name
 Description     to update publication name using Id
 Access          public
 Parameter       num
@@ -304,6 +304,34 @@ booky.put("/publication/update/name/:num", (req,res) => {
     return res.json({publication: database.publication});
 });
 
+/*
+Route           /publication/update/book
+Description     to update/add new book to publication name 
+Access          public
+Parameter       isbn
+Methods         put
+*/ 
+booky.put("/publication/update/book/:isbn", (req,res) => {
+    //update publication database
+    database.publication.forEach((pub) => {
+        if(pub.id == req.body.pubId) {
+            return publication.book.push(req.params.isbn);
+        }
+    });
+
+    //update book database
+    database.books.forEach((book) => {
+        if(book.ISBN == req.params.isbn){
+            book.publication = req.body.pubId;
+            return;
+        }
+    });
+    return res.json({
+        books: database.books, 
+        publications: database.publications,
+        message: "Successfully updated publication"
+    });
+});
 
     
 booky.listen(4000, () => console.log("The server is running"));

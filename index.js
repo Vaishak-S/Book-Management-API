@@ -1,5 +1,8 @@
-const express = require("express");
 
+require("dotenv").config();
+
+const express = require("express");
+const mongoose = require("mongoose");
 //importing database
 const database = require("./database");
 
@@ -8,6 +11,16 @@ const booky = express();
 
 //configuration
 booky.use(express.json());
+
+//Establishing database connection
+mongoose.connect(process.env.MONGO_URL, 
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true 
+})
+.then(() => console.log("Connection Established"));
 
 /*
 Route           /

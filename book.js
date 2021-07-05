@@ -13,6 +13,6 @@ const BookSchema = mongoose.Schema({
 });
 
 //Creating a book modal
-const BookModel = mongoose.model("books",Bookschema);
+const BookModel = mongoose.model("books",BookSchema);
 
 module.exports = BookModel;
